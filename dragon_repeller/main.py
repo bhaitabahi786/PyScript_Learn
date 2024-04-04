@@ -9,16 +9,16 @@ fighting = None
 monsterHealth = None
 inventory = ["stick"]
 
-button1 = document.querySelector("#button1");
-button2 = document.querySelector("#button2");
-button3 = document.querySelector("#button3");
-text = document.querySelector("#text");
-xpText = document.querySelector("#xpText");
-healthText = document.querySelector("#healthText");
-goldText = document.querySelector("#goldText");
-monsterStats = document.querySelector("#monsterStats");
-monsterName = document.querySelector("#monsterName");
-monsterHealthText = document.querySelector("#monsterHealth"); 
+button1 = document.querySelector("#button1")
+button2 = document.querySelector("#button2")
+button3 = document.querySelector("#button3")
+text = document.querySelector("#text")
+xpText = document.querySelector("#xpText")
+healthText = document.querySelector("#healthText")
+goldText = document.querySelector("#goldText")
+monsterStats = document.querySelector("#monsterStats")
+monsterName = document.querySelector("#monsterName")
+monsterHealthText = document.querySelector("#monsterHealth")
 
 weapons = [
     {"name": "stick", "power": 5},
@@ -183,12 +183,17 @@ def buy_health(event):
 
 def buy_weapon(event):
     global gold, currentWeapon
-    if gold >= 30:
-        currentWeapon += 1
-        gold -= 30
-        goldText.innerHTML = gold
+
+    if currentWeapon == 3:
+        text.innerHTML = "You already have the best weapon."
     else:
-        text.innerHTML = "You don't have enough gold."
+
+        if gold >= 30:
+            currentWeapon += 1
+            gold -= 30
+            goldText.innerHTML = gold
+        else:
+            text.innerHTML = "You don't have enough gold."
 
 def dodge(event):
     global health
