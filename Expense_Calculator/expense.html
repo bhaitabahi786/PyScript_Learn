@@ -11,95 +11,32 @@
 </head>
 <body>
     <div class="container">
-        <h1>Expense Calculator in PyScript</h1>
-      
-            <div class="form-group">
-                <label for="date">Date:</label>
-                <input type="date" class="form-control" id="date">
+        <h1>Expense Calculator</h1>
+        <form id="expenseForm">
+            <div class="mb-3">
+                <label for="name" class="form-label">Expense Name:</label>
+                <input type="text" class="form-control" id="name" required>
             </div>
-            <div class="form-group">
-                <label for="expense">Expense:</label>
-                <input type="number" class="form-control" id="expense" placeholder="Enter expense amount">
+            <div class="mb-3">
+                <label for="amount" class="form-label">Amount:</label>
+                <input type="number" class="form-control" id="amount" required>
             </div>
-            <div class="form-group">
-                <label for="category">Category:</label>
-                <select class="form-control" id="category">
-                    <option value="food">Food</option>
-                    <option value="transportation">Transportation</option>
-                    <option value="entertainment">Entertainment</option>
-                    <option value="utilities">Utilities</option>
-                    <option value="other">Other</option>
-                </select>
-            </div>
-            <!-- <button type="submit" class="btn btn-primary">Add Expense</button> -->
-            <button py-click="Add_expense">Add Expense</button>
-        
-        <h2>Total Expenses: <span id="totalExpenses"></span></h2>
-            <table id="tableAdd">
+            <button type="button" class="btn btn-primary" py-click="addExpense">Add Expense</button>
+        </form>
+        <table class="table mt-4" id="expenseTable">
+            <thead>
                 <tr>
-                    <th>Date</th>
-                    <th>Expense</th>
-                    <th>Category</th>
+                    <th>Expense Name</th>
+                    <th>Amount</th>
+                    <th></th>
                 </tr>
-
-            </table>
-        
+            </thead>
+            <tbody id="expenseTableBody"></tbody>
+        </table>
     </div>
 
-    <py-script>
-        from pyscript import document, display
-        from pyscript import window
-        from pyweb import pydom
-        
-        expenses = []
 
-        def append_expense():
-            global expenses
-            date = document.getElementById('date').value
-            expense = document.getElementById('expense').value
-            category = document.getElementById('category').value
-            expenses.append({'date': date, 'expense': expense, 'category': category})
-            print(expenses)
-
-        def Add_expense(event):
-            global expenses
-
-            date = document.getElementById('date').value
-            print(date)
-            expense = document.getElementById('expense').value
-            print(expense)
-            category = document.getElementById('category').value
-            print(category)
-            
-            append_expense()
-            total = 0
-            for exp in expenses:
-                total += int(exp['expense'])
-            # document.getElementById('totalExpenses').innerHTML = expenses 
-
-            print("displaying expenses")
-            display_expenses()
-
-        def display_expenses():
-            global expenses
-
-            # Creating an element directly from pydom creates an unbounded element.
-            new_Row = pydom.create("tr")
-
-            # Creating an element from another element automatically creates that element
-            # as a child of the original element
-            new_data = new_Row.create("td", html={expenses[-1]['date']})
-            new_data1 = new_Row.create("td", html={expenses[-1]['expense']})
-            new_data2 = new_Row.create("td", html={expenses[-1]['category']})
-            
-            # elements can be appended to any other element on the page
-            pydom['#tableAdd'][0].append(new_Row)
-
-            display(expenses)
-
-        
-    </py-script>
-
+    <script type="py" src="./main.py" ></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
